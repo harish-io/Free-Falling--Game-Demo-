@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CreateJS export from freefalling.fla</title>
+<script src="libs/easel.js"></script>
+<script src="libs/Tween.js"></script>
+<script src="libs/Timeline.js"></script>
+<script src="libs/Ease.js"></script>
+<script src="libs/MovieClip.js"></script>
+<script src="libs/preload.js"></script>
+<script src="freefalling.js"></script>
+<script src="main.js"></script>
+
+<script>
+var canvas, stage, exportRoot, images;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	images = {};
+
+	var manifest = [
+		{src:"images/_1344946867_pumpkin.png", id:"_1344946867_pumpkin"},
+		{src:"images/Angry.png", id:"Angry"},
+		{src:"images/bg_edit.jpg", id:"bg_edit"},
+		{src:"images/bg.jpg", id:"bg"},
+		{src:"images/Bitmap1.png", id:"Bitmap1"},
+		{src:"images/Bitmap2.png", id:"Bitmap2"},
+		{src:"images/Bitmap3.png", id:"Bitmap3"},
+		{src:"images/Cool.png", id:"Cool"},
+		{src:"images/dog.png", id:"dog"},
+		{src:"images/girl.png", id:"girl"},
+		{src:"images/kevin_img.png", id:"kevin_img"},
+		{src:"images/kevinhoyt.jpg", id:"kevinhoyt"},
+		{src:"images/melon_tummy.png", id:"melon_tummy"},
+		{src:"images/mihai_corlan_twitter.jpg", id:"mihai_corlan_twitter"},
+		{src:"images/mihai_image.png", id:"mihai_image"},
+		{src:"images/parachute.png", id:"parachute"},
+		{src:"images/Pirate.png", id:"Pirate"},
+		{src:"images/pumpkin.png", id:"pumpkin"},
+		{src:"images/terry_image.png", id:"terry_image"},
+		{src:"images/terry.jpg", id:"terry"},
+		{src:"images/thumbs.png", id:"thumbs"},
+		{src:"images/watermelon_bg.jpg", id:"watermelon_bg"},
+		{src:"images/watermelon_bgjpegcopy.jpg", id:"watermelon_bgjpegcopy"},
+		{src:"images/watermelon_trans.png", id:"watermelon_trans"},
+		{src:"images/watermelon_transparent.png", id:"watermelon_transparent"},
+		{src:"images/watermelon_1.png", id:"watermelon_1"}
+	];
+
+	var loader = new PreloadJS(false);
+	loader.onFileLoad = handleFileLoad;
+	loader.onComplete = handleComplete;
+	loader.loadManifest(manifest);
+}
+
+function handleFileLoad(o) {
+	if (o.type == "image") { images[o.id] = o.result; }
+}
+
+function handleComplete() {
+	exportRoot = new lib.freefalling();
+
+	stage = new Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	Ticker.setFPS(24);
+	Ticker.addListener(window);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4">
+	<canvas id="canvas" width="1000" height="650" style="background-color:#ffffff"></canvas>
+</body>
+</html>
